@@ -1,0 +1,15 @@
+@mixin common-style($padding: 10px, $margin: 10px, $border-radius: 5px, $font-size: 16px) {
+    padding: $padding;
+    margin: $margin;
+    border-radius: $border-radius;
+    font-size: $font-size;
+  }
+  
+  // mixin for responsive
+  @mixin responsive-font($mobile-size, $desktop-size) {
+    font-size: $mobile-size;
+  
+    @media (min-width: 768px) {
+      font-size: $desktop-size;
+    }
+  }

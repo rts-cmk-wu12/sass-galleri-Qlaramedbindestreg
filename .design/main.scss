@@ -1,0 +1,213 @@
+@use 'base';
+@use 'mixins';
+@use 'layout';
+@use 'variables';
+@use 'components';
+
+  // header 
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: $background-color;
+  
+    // search Bar 
+    .search-bar {
+      width: 100%;
+      max-width: 600px;
+      padding: 5px;
+      font-size: $font-size-base;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      @include common-style(15px, 10px, 8px);
+    }
+  
+    // headline 
+    h1 {
+      font-size: $font-size-large;
+      margin-bottom: 10px;
+      margin-left: 100px;
+      padding: 10px;
+    }
+  
+    // nav
+    nav {
+        margin-bottom: 20px;
+        margin-left: 100px;
+        @include common-style(5px, 0px, 5px);
+    
+        ul {
+          display: flex;
+          list-style-type: none;
+          justify-content: center;
+          position: relative;
+    
+          li {
+            margin: 0 15px;
+            font-size: $font-size-medium;
+    
+            a {
+              text-decoration: none;
+              color: $text-color;
+              padding: 5px 10px;
+              border-radius: 5px;
+              display: inline-block;
+    
+              &:hover {
+                background-color: $hover-bg-color;
+              }
+            }
+    
+            // dropdown
+            &.dropdown {
+              position: relative;
+    
+              a {
+                cursor: pointer;
+    
+                // arrow 
+                &::after {
+                  font-size: $font-size-small;
+                  margin-left: 5px;
+                }
+              }
+    
+              // dropdown content
+              .dropdown-content {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: $dropdown-bg-color;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+                padding: 10px 0;
+                border-radius: 5px;
+                z-index: 1000;
+    
+                li {
+                  padding: 0;
+    
+                  a {
+                    padding: 10px 20px;
+                    white-space: nowrap;
+    
+                    &:hover {
+                      background-color: $dropdown-hover-bg;
+                    }
+                  }
+                }
+              }
+    
+              &:hover .dropdown-content, &.active .dropdown-content {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+    }
+  // modal
+    .modal {
+        display: none;
+       position: fixed;
+        z-index: 1000;
+        padding-top: 60px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $modal-bg-color;
+      
+        .modal-content {
+          margin: auto;
+          display: block;
+          width: 80%;
+          max-width: 700px;
+        
+        }
+      
+        .close {
+          position: absolute;
+          top: 15px;
+          right: 35px;
+          color: #fff;
+          font-size: 40px;
+          font-weight: bold;
+          cursor: pointer;
+      
+          &:hover,
+          &:focus {
+            color: lighten($modal-bg-color, 30%);
+            text-decoration: none;
+          }
+        }
+      }
+  // grid 
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  
+    img {
+      width: 100%;
+      @include common-style(0px, 0px, 5px);
+      height: auto;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+  }
+
+  // media query
+  @media (max-width: 768px) {
+    header {
+      padding: 15px;
+  
+      .search-bar {
+     
+        max-width: 90%;
+        font-size: $font-size-base * 0.9;
+        
+      }
+  
+      h1 {
+        font-size: $font-size-large * 0.8;
+        @include responsive-font(2rem, $font-size-large);
+      }
+  
+      nav {
+        ul {
+          flex-direction: column; 
+          align-items: center;
+  
+          li {
+            margin: 10px 0;  
+          }
+  
+          .dropdown .dropdown-content {
+            position: static;  
+            padding: 0;
+            background-color: transparent;
+            box-shadow: none;
+  
+            a {
+              padding: 10px;
+              background-color: $hover-bg-color;  
+              width: 100%;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  
+    // Adjust the gallery for smaller screens
+    .gallery {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));  
+      padding: 15px;
+    }
+  }
